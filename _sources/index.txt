@@ -1,0 +1,56 @@
+.. PCR system documentation master file, created by
+   sphinx-quickstart on Sun Jun 28 16:54:33 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome!
+========
+
+This is PCR system's website.
+
+Our work deals with the modeling of human behaviors during a catastrophic event. Several complex models, at different scales, can be found in the literature in order to model crowd dynamics. Up to now, the models only take into account the panic since it is the most feared reaction. However, human sciences learn us that the population during a catastrophic event can exhibit different concurrent reactions and each individual does not keep the same behavior. A first work associating geographers, mathematicians and computer scientists has been proposed in this direction (ICCSA 2013). We have developed a first SIR-based model considering three different types of collective behaviors in catastrophic event and their different interactions.
+
+.. toctree::
+   :maxdepth: 2
+
+   model.rst
+   domino.rst
+   mortality.rst
+
+
+Laboratories
+============
+
+Mathematics and informatics
+---------------------------
+
+.. figure :: _static/lmah.png
+  :width: 10%
+  :align: center
+
+  *LMAH*
+
+.. figure :: _static/litis.jpeg
+  :width: 10%
+  :align: center
+
+  *LITIS*
+
+Geography
+---------
+
+.. figure :: _static/Logo_Geoazur.jpg
+  :width: 10%
+  :align: center
+
+  *Géoazur*
+
+.. figure :: _static/Logos_Edwidge.jpg
+  :width: 10%
+  :align: center
+
+  *Géocités*
+
+
+
+
