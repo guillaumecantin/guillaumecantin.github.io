@@ -14,7 +14,7 @@
 <link rel="canonical" href="/lyapunov.html">
 
         <meta name="author" content="Guillaume Cantin" />
-        <meta name="keywords" content="Lyapunov,Lorenz,bifurcation,chaos,matplotlib,python" />
+        <meta name="keywords" content="Lyapunov,Lorenz,bifurcation,chaos,scipy,python" />
         <meta name="description" content="A python programm to compute Lyapunov exponents for a continuous dynamical system" />
 
         <meta property="og:site_name" content="Dynamical Systems" />
@@ -22,13 +22,13 @@
         <meta property="og:title" content="Lyapunov exponents"/>
         <meta property="og:url" content="/lyapunov.html"/>
         <meta property="og:description" content="A python programm to compute Lyapunov exponents for a continuous dynamical system"/>
-        <meta property="article:published_time" content="2010-10-03" />
-            <meta property="article:section" content="Chaos" />
+        <meta property="article:published_time" content="2016-01-01" />
+            <meta property="article:section" content="Bifurcations" />
             <meta property="article:tag" content="Lyapunov" />
             <meta property="article:tag" content="Lorenz" />
             <meta property="article:tag" content="bifurcation" />
             <meta property="article:tag" content="chaos" />
-            <meta property="article:tag" content="matplotlib" />
+            <meta property="article:tag" content="scipy" />
             <meta property="article:tag" content="python" />
             <meta property="article:author" content="Guillaume Cantin" />
 
@@ -61,11 +61,8 @@
                         <li >
                             <a href="/category/about.html">About</a>
                         </li>
-                        <li >
-                            <a href="/category/bifurcations.html">Bifurcations</a>
-                        </li>
                         <li class="active">
-                            <a href="/category/chaos.html">Chaos</a>
+                            <a href="/category/bifurcations.html">Bifurcations</a>
                         </li>
                         <li >
                             <a href="/category/pcr-system.html">Pcr system</a>
@@ -114,7 +111,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2010-10-03T10:20:00+02:00"> dim. 03 octobre 2010</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-01-01T10:20:00+01:00"> ven. 01 janvier 2016</time>
     </span>
 
 
@@ -128,44 +125,52 @@
         /
 	<a href="/tag/chaos.html">chaos</a>
         /
-	<a href="/tag/matplotlib.html">matplotlib</a>
+	<a href="/tag/scipy.html">scipy</a>
         /
 	<a href="/tag/python.html">python</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <div class="math">
-\begin{align*}
-f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
-\lim \limits_{x \to +\infty} (x^2 + 3x + 1) = +\infty
-\end{align*}
-</div>
+                <p>The Lyapunov exponents are used in the theory of dynamical systems to measure the sensibility to a variation of the initial condition.
+Positive Lyapunov exponents do not systematically mean chaos. The following programm, written in <strong>python</strong>, computes the Lyapunov exponents
+for the Lorenz system, using Wolf, Swinney and Vastano algorithm.</p>
 <div class="highlight"><pre><span class="c">#!/usr/bin/env python3</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Programme pour calculer les exposants de Lyapunov</span>
-<span class="sd">du système de Lorenz</span>
-<span class="sd">Source : Dang-Vu et Delcarte</span>
-<span class="sd">#http://sprott.physics.wisc.edu/chaos/wolfflow.bas</span>
+<span class="sd">A programm to compute the Lyapunov exponents of the Lorenz system</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="c"># appel des bibliothèques scientifiques</span>
+<span class="c"># Scientific libraries</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span> <span class="k">as</span> <span class="n">ln</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-<span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">operator</span><span class="o">,</span> <span class="nn">random</span>
 
-<span class="c"># Produit scalaire et norme</span>
+<span class="c"># Inner product and norm</span>
+
 <span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
   <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">u3</span> <span class="o">=</span> <span class="n">u</span>
   <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span> <span class="o">=</span> <span class="n">v</span>
   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">u1</span><span class="o">*</span><span class="n">v1</span> <span class="o">+</span> <span class="n">u2</span><span class="o">*</span><span class="n">v2</span> <span class="o">+</span> <span class="n">u3</span><span class="o">*</span><span class="n">v3</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">norme</span><span class="p">(</span><span class="n">u</span><span class="p">):</span><span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">norme</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
 
-<span class="c"># Système de Lorenz</span>
+<span class="c"># Lorenz system</span>
+
+<span class="c"># Parameters</span>
 <span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">45.92</span><span class="p">,</span> <span class="mi">4</span>
+
+<span class="c"># Lorenz equations</span>
+<span class="k">def</span> <span class="nf">l</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">X</span>
+  <span class="n">dx</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">dy</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">-</span><span class="n">y</span>
+  <span class="n">dz</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">z</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]</span>
+
+<span class="c"># Extended system</span>
 <span class="k">def</span> <span class="nf">L</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
   <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">v11</span><span class="p">,</span> <span class="n">v12</span><span class="p">,</span> <span class="n">v13</span><span class="p">,</span> <span class="n">v21</span><span class="p">,</span> <span class="n">v22</span><span class="p">,</span> <span class="n">v23</span><span class="p">,</span> <span class="n">v31</span><span class="p">,</span> <span class="n">v32</span><span class="p">,</span> <span class="n">v33</span> <span class="o">=</span> <span class="n">V</span>
   <span class="n">dx</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
@@ -182,32 +187,22 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
   <span class="n">dv33</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">v31</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">v32</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">v33</span>
   <span class="k">return</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">dv11</span><span class="p">,</span> <span class="n">dv12</span><span class="p">,</span> <span class="n">dv13</span><span class="p">,</span> <span class="n">dv21</span><span class="p">,</span> <span class="n">dv22</span><span class="p">,</span> <span class="n">dv23</span><span class="p">,</span> <span class="n">dv31</span><span class="p">,</span> <span class="n">dv32</span><span class="p">,</span> <span class="n">dv33</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">l</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-  <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">X</span>
-  <span class="n">dx</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
-  <span class="n">dy</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">-</span><span class="n">y</span>
-  <span class="n">dz</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">z</span>
-  <span class="k">return</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">Jacobi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="n">s</span> <span class="p">,</span>  <span class="n">s</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
-                    <span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">],</span>
-                    <span class="p">[</span><span class="n">y</span>  <span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="p">]])</span>
-
 <span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+
+<span class="c"># Integrate until attractor</span>
 <span class="n">orbit</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
 <span class="n">X0</span> <span class="o">=</span> <span class="n">orbit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;(1) First method&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;Beginning calculating&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
 
 <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="n">v3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 
+<span class="c"># Compute an orbit</span>
 <span class="n">orbit</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
 
 <span class="n">LE1</span> <span class="o">=</span> <span class="mi">0</span>
@@ -215,115 +210,34 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
 <span class="n">LE3</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">k</span><span class="o">%</span><span class="mi">100</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">k</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
   <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
   <span class="n">V0</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">v1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v1</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v1</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v2</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v2</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">v3</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v3</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v3</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+  <span class="c"># Integration for one step</span>
   <span class="n">V</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">V0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">dt</span><span class="p">])</span>
   <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
   <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">7</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">8</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
   <span class="n">v3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">9</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">10</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">11</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+  <span class="c"># Accumulation of the deviation</span>
   <span class="n">LE1</span> <span class="o">=</span> <span class="n">LE1</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span>
   <span class="n">LE2</span> <span class="o">=</span> <span class="n">LE2</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v2</span><span class="p">))</span>
   <span class="n">LE3</span> <span class="o">=</span> <span class="n">LE3</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v3</span><span class="p">))</span>
+
+  <span class="c"># Gram-Schmidt method</span>
   <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
   <span class="n">v2</span> <span class="o">=</span> <span class="p">(</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span>
   <span class="n">v3</span> <span class="o">=</span> <span class="p">(</span><span class="n">v3</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v2</span><span class="p">)</span><span class="o">*</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v3</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v2</span><span class="p">)</span><span class="o">*</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
 <span class="n">LE1</span><span class="p">,</span> <span class="n">LE2</span><span class="p">,</span> <span class="n">LE3</span> <span class="o">=</span> <span class="n">LE1</span><span class="o">/</span><span class="n">T</span><span class="p">,</span> <span class="n">LE2</span><span class="o">/</span><span class="n">T</span><span class="p">,</span> <span class="n">LE3</span><span class="o">/</span><span class="n">T</span>
+
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;Lyapunov exponents :&#39;</span><span class="p">,</span><span class="n">LE1</span><span class="p">,</span> <span class="n">LE2</span><span class="p">,</span> <span class="n">LE3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Trace :&#39;</span><span class="p">,</span> <span class="n">LE1</span><span class="o">+</span><span class="n">LE2</span><span class="o">+</span><span class="n">LE3</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;(2) Second method&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Beginning calculating&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
-
-<span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-<span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-<span class="n">v3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-
-<span class="n">orbit</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
-
-<span class="n">LE1</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">LE2</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">LE3</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">k</span><span class="o">%</span><span class="mi">100</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
-  <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">orbit</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-  <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">Jacobi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">dt</span>
-  <span class="n">v1</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">v1</span>
-  <span class="n">v2</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">v2</span>
-  <span class="n">v3</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">v3</span>
-  <span class="n">LE1</span> <span class="o">=</span> <span class="n">LE1</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span>
-  <span class="n">LE2</span> <span class="o">=</span> <span class="n">LE2</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v2</span><span class="p">))</span>
-  <span class="n">LE3</span> <span class="o">=</span> <span class="n">LE3</span> <span class="o">+</span> <span class="n">ln</span><span class="p">(</span><span class="n">norme</span><span class="p">(</span><span class="n">v3</span><span class="p">))</span>
-  <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
-  <span class="n">v2</span> <span class="o">=</span> <span class="p">(</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span>
-  <span class="n">v3</span> <span class="o">=</span> <span class="p">(</span><span class="n">v3</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v2</span><span class="p">)</span><span class="o">*</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span><span class="o">/</span><span class="n">norme</span><span class="p">(</span><span class="n">v3</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v2</span><span class="p">)</span><span class="o">*</span><span class="n">v2</span> <span class="o">-</span> <span class="n">ps</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="n">LE1</span><span class="p">,</span> <span class="n">LE2</span><span class="p">,</span> <span class="n">LE3</span> <span class="o">=</span> <span class="n">LE1</span><span class="o">/</span><span class="n">T</span><span class="p">,</span> <span class="n">LE2</span><span class="o">/</span><span class="n">T</span><span class="p">,</span> <span class="n">LE3</span><span class="o">/</span><span class="n">T</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Lyapunov exponents :&#39;</span><span class="p">,</span><span class="n">LE1</span><span class="p">,</span> <span class="n">LE2</span><span class="p">,</span> <span class="n">LE3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Trace :&#39;</span><span class="p">,</span> <span class="n">LE1</span><span class="o">+</span><span class="n">LE2</span><span class="o">+</span><span class="n">LE3</span><span class="p">)</span>
 </pre></div>
-<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
 
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    var location_protocol = (false) ? 'https' : document.location.protocol;
-    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
             <!-- /.entry-content -->
 
@@ -361,7 +275,9 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
     <ul class="list-group list-group-flush">
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="http://mathsquare.free.fr"><i class="fa fa-mathsquare-square fa-lg"></i>Mathsquare</a></li>
+                <li class="list-group-item"><a href="http://matplotlib.org/"><i class="fa fa-matplotlib-square fa-lg"></i>Matplotlib</a></li>
+                <li class="list-group-item"><a href="https://github.com/"><i class="fa fa-github-square fa-lg"></i>GitHub</a></li>
+                <li class="list-group-item"><a href="https://www.researchgate.net/"><i class="fa fa-researchgate-square fa-lg"></i>ResearchGate</a></li>
               </ul>
             </li>
 
@@ -374,14 +290,9 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
                             bifurcation
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-4">
                         <a href="/tag/chaos.html">
                             chaos
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/henon.html">
-                            Hénon
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -394,24 +305,19 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
                             Lyapunov
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/matplotlib.html">
-                            matplotlib
-                        </a>
-                    </li>
                     <li class="list-group-item tag-4">
                         <a href="/tag/modeling.html">
                             modeling
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/poincare.html">
-                            Poincaré
-                        </a>
-                    </li>
                     <li class="list-group-item tag-1">
                         <a href="/tag/python.html">
                             python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/scipy.html">
+                            scipy
                         </a>
                     </li>
                 </ul>
@@ -428,11 +334,6 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
                 Python.org
             </a>
         </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
       </ul>
     </li>
     </ul>
@@ -445,7 +346,7 @@ f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}} \\
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Guillaume Cantin
+         <div class="col-xs-10">&copy; 2016 Guillaume Cantin
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
