@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>PCR system - Dynamical Systems</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/pcrsystem.html">
+
+        <meta name="author" content="Guillaume Cantin" />
+        <meta name="keywords" content="bifurcation,modeling,python" />
+        <meta name="description" content="A mathematical model for human behaviors during catastrophic events" />
+
+        <meta property="og:site_name" content="Dynamical Systems" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="PCR system"/>
+        <meta property="og:url" content="/pcrsystem.html"/>
+        <meta property="og:description" content="A mathematical model for human behaviors during catastrophic events"/>
+        <meta property="article:published_time" content="2015-10-03" />
+            <meta property="article:section" content="PCR system" />
+            <meta property="article:tag" content="bifurcation" />
+            <meta property="article:tag" content="modeling" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="Guillaume Cantin" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img src="/images/logo.png" width="30px"/> Dynamical Systems            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/about.html">About</a>
+                        </li>
+                        <li >
+                            <a href="/category/bifurcations.html">Bifurcations</a>
+                        </li>
+                        <li >
+                            <a href="/category/chaos.html">Chaos</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/pcr-system.html">Pcr system</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<style>
+	#banner{
+	    background-image:url("/images/background.gif");
+	}
+</style>
+
+<div id="banner">
+	<div class="container">
+		<div class="copy">
+			<h1>Dynamical Systems</h1>
+				<p class="intro">Guillaume Cantin</p>
+		</div>
+	</div>
+</div><!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pcrsystem.html"
+                       rel="bookmark"
+                       title="Permalink to PCR system">
+                        PCR system
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-10-03T10:20:00+02:00"> sam. 03 octobre 2015</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/bifurcation.html">bifurcation</a>
+        /
+	<a href="/tag/modeling.html">modeling</a>
+        /
+	<a href="/tag/python.html">python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <div class="section" id="graphical-model">
+<h2>Graphical model</h2>
+<div class="figure align-center">
+<img alt="Graphical model" src="images/model.png" style="width: 65%;" />
+<p class="caption"><em>Graphical model</em></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="differential-system">
+<h2>Differential system</h2>
+<p>The PCR system is given by the following system of ODE :</p>
+<div class="math">
+\begin{equation*}
+\begin{cases}
+\dfrac{d r}{d t}=\gamma (t)q \left( 1-\dfrac{r}{r_m} \right) -  (B_1+B_2)r + F(r,c)rc+  G (r,p) rp + s_1 c + s_2 p \\
+\dfrac{d c}{d t} = B_1 r -  F (r,c) rc + C_1 p - s_1 c - C_2  c - \varphi (t) c \left( 1-b\right) + H(c,p)c p \\
+\dfrac{d p}{d t} = B_2 r - s_2 p - G (r,p)r p - C_1 p + C_2 c - H(c,p)cp \\
+\dfrac{d q}{d t} = -\gamma (t) q  \left( 1- \dfrac{r}{r_m} \right)  \\
+\dfrac{d b}{d t} = \varphi (t) c \left( 1- b \right)
+\end{cases}
+\end{equation*}
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Theorem</div>
+<div class="panel-body">
+If <span class="math">\(C_1&gt;0\)</span>, the equilibrium point <span class="math">\((0,0,0,0,1)\)</span> is
+locally asymptotically semi-stable.</div>
+</div>
+<div class="breadcrumb"><p><strong>Theorem</strong></p>
+<p>If <span class="math">\(C_1&gt;0\)</span>, the equilibrium point <span class="math">\((0,0,0,0,1)\)</span> is locally asymptotically semi-stable.</p>
+</div>
+<div class="progress progress-striped active">
+<div class="progress-bar" style="width: 45%"></div>
+</div></div>
+<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+
+	<!-- Beginning of omment system -->
+	<hr>
+	<div class="entry-content">
+	<h4>Comments:</h4>
+	<article id="comment-1rst" style="border: 1px solid #DDDDDD; padding: 5px 0px 0px 5px; margin: 0px -1px 5px px;">
+		<h4>Visiteur</h4>
+		<p>Posted on <abbr class="published" title="2016-03-24T15:02:00+02:00">jeu. 24 mars 2016</abbr></p>
+		
+			<p>A very kind remark</p>
+
+	</article><br/>
+	<hr>
+	<h4>Add a comment:</h4><!--a{color:#18bc9c;text-decoration:none}a:hover,a:focus{color:#18bc9c;text-decoration:underline}-->
+	<p>If you want to add a comment, just <a class="reference external" href="mailto:gcmaths76@free.fr">send a email</a>.</p>
+
+	<!-- Formulaire : solution présentant quelques risques...
+	<form class="form-horizontal" role="form" id="commentForm" action="mailto:gcmaths76@free.fr" method="get" enctype="text/plain">
+	<div class="col-lg-8">
+		<input name="Name" class="form-control has-success" type="text" id="commentForm_inputName" placeholder="Enter your name" maxlength="40"></br>
+		<input type="email" class="form-control" id="commentForm_inputEmail" maxlength="40" placeholder="you@mail.com"/><br/>
+		<textarea name="Text" class="form-control" id="commentForm_inputText" rows="5" style="resize:vertical;" placeholder="Your comment"></textarea></br>
+		<button type="submit" class="btn btn-default" id="commentForm_button">Post via email</button> -->
+		<!-- <input type="submit" class="form-control" name="submit" value="Post via email" id="commentForm_button"/> -->
+	<!--
+	</div>
+	</form> -->
+	<!-- End of omment system -->
+
+	</div>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://mathsquare.free.fr"><i class="fa fa-mathsquare-square fa-lg"></i>Mathsquare</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/bifurcation.html">
+                            bifurcation
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/chaos.html">
+                            chaos
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/henon.html">
+                            Hénon
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/lorenz.html">
+                            Lorenz
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/lyapunov.html">
+                            Lyapunov
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/matplotlib.html">
+                            matplotlib
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/modeling.html">
+                            modeling
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/poincare.html">
+                            Poincaré
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Guillaume Cantin
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/theme/js/bodypadding.js"></script>
+
+</body>
+</html>
