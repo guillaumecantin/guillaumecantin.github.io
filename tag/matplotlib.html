@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>PCR system - Dynamical Systems</title>
+    <title>matplotlib - Dynamical Systems</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,23 +11,16 @@
 
     <link href="/images/favicon.ico" rel="icon">
 
-<link rel="canonical" href="/pcrsystem.html">
 
-        <meta name="author" content="Guillaume Cantin" />
-        <meta name="keywords" content="bifurcation,modeling,stability" />
-        <meta name="description" content="A mathematical model for human behaviors during catastrophic events." />
+    <meta name="author" content="Guillaume Cantin" />
+    <meta name="keywords" content="matplotlib" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Dynamical Systems" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="PCR system"/>
-        <meta property="og:url" content="/pcrsystem.html"/>
-        <meta property="og:description" content="A mathematical model for human behaviors during catastrophic events."/>
-        <meta property="article:published_time" content="2015-01-03" />
-            <meta property="article:section" content="PCR system" />
-            <meta property="article:tag" content="bifurcation" />
-            <meta property="article:tag" content="modeling" />
-            <meta property="article:tag" content="stability" />
-            <meta property="article:author" content="Guillaume Cantin" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Dynamical Systems"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="Dynamical Systems"/>
 
 
     <!-- Bootstrap -->
@@ -61,7 +54,7 @@
                         <li >
                             <a href="/category/bifurcations.html">Bifurcations</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/pcr-system.html">Pcr system</a>
                         </li>
             </ul>
@@ -91,138 +84,20 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/pcrsystem.html"
-                       rel="bookmark"
-                       title="Permalink to PCR system">
-                        PCR system
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-01-03T10:20:00+01:00"> sam. 03 janvier 2015</time>
-    </span>
+	
+            <article>
+                <h2><a href="/poincare.html">Poincaré map</a></h2>
+                <div class="summary"><p class="first last">A python programm to compute a Poincaré map of the Hénon-Heiles model using the Hénon trick.</p>
 
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/bifurcation.html">bifurcation</a>
-        /
-	<a href="/tag/modeling.html">modeling</a>
-        /
-	<a href="/tag/stability.html">stability</a>
-    
-</footer><!-- /.post-info -->                    </div>
+                    <a class="btn btn-default btn-xs" href="/poincare.html">more ...</a>
                 </div>
-                <div class="section" id="graphical-model">
-<h2>Graphical model</h2>
-<div style="text-align:center"><div class="figure">
-<img alt="Graphical model" src="images/model.png" style="width: 65%;" />
-<p class="caption"><em>Graphical model</em></p>
-</div>
-</div></div>
-<hr class="docutils" />
-<div class="section" id="differential-system">
-<h2>Differential system</h2>
-<p>The PCR system is given by the following system of ODE :</p>
-<div class="math">
-\begin{equation*}
-\begin{cases}
-\dfrac{d r}{d t}=\gamma (t)q \left( 1-\dfrac{r}{r_m} \right) -  (B_1+B_2)r + F(r,c)rc+  G (r,p) rp + s_1 c + s_2 p \\
-\dfrac{d c}{d t} = B_1 r -  F (r,c) rc + C_1 p - s_1 c - C_2  c - \varphi (t) c \left( 1-b\right) + H(c,p)c p \\
-\dfrac{d p}{d t} = B_2 r - s_2 p - G (r,p)r p - C_1 p + C_2 c - H(c,p)cp \\
-\dfrac{d q}{d t} = -\gamma (t) q  \left( 1- \dfrac{r}{r_m} \right)  \\
-\dfrac{d b}{d t} = \varphi (t) c \left( 1- b \right)
-\end{cases}
-\end{equation*}
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-Theorem</div>
-<div class="panel-body">
-If <span class="math">\(C_1&gt;0\)</span>, the equilibrium point <span class="math">\((0,~0,~0,~0,~1)\)</span> is
-locally asymptotically semi-stable.</div>
-</div>
-</div>
-<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    var location_protocol = (false) ? 'https' : document.location.protocol;
-    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
-            </div>
-            <!-- /.entry-content -->
-
-	<!-- Beginning of comment system -->
-	<hr>
-	<div class="entry-content">
-	<h4>Comments</h4>
-	<br/>
-	<p>If you want to add a comment, just <a class="reference external" href="mailto:guillaumecantin@mail.com">send a email</a>.</p>
-	<!-- End of comment system -->
-
+            </article>
+            <hr/>
+	<div style="text-align:center">
+		<div class="figure">
+		<img alt="Gallery" src="images/gallery.gif" style="width: 55%;" />
+		</div>
 	</div>
-        </article>
-    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
