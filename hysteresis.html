@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>PCR system - Dynamical Systems</title>
+    <title>Hysteresis - Dynamical Systems</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,22 +11,23 @@
 
     <link href="/images/favicon.ico" rel="icon">
 
-<link rel="canonical" href="/pcrsystem.html">
+<link rel="canonical" href="/hysteresis.html">
 
         <meta name="author" content="Guillaume Cantin" />
-        <meta name="keywords" content="bifurcation,modeling,stability" />
-        <meta name="description" content="A mathematical model for human behaviors during catastrophic events." />
+        <meta name="keywords" content="bifurcation,scipy,python,matplotlib" />
+        <meta name="description" content="A python programm for a numerical computation of hysteresis." />
 
         <meta property="og:site_name" content="Dynamical Systems" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="PCR system"/>
-        <meta property="og:url" content="/pcrsystem.html"/>
-        <meta property="og:description" content="A mathematical model for human behaviors during catastrophic events."/>
-        <meta property="article:published_time" content="2015-01-03" />
-            <meta property="article:section" content="PCR system" />
+        <meta property="og:title" content="Hysteresis"/>
+        <meta property="og:url" content="/hysteresis.html"/>
+        <meta property="og:description" content="A python programm for a numerical computation of hysteresis."/>
+        <meta property="article:published_time" content="2016-01-01" />
+            <meta property="article:section" content="Bifurcations" />
             <meta property="article:tag" content="bifurcation" />
-            <meta property="article:tag" content="modeling" />
-            <meta property="article:tag" content="stability" />
+            <meta property="article:tag" content="scipy" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="matplotlib" />
             <meta property="article:author" content="Guillaume Cantin" />
 
 
@@ -58,10 +59,10 @@
                         <li >
                             <a href="/category/about.html">About</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/bifurcations.html">Bifurcations</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/pcr-system.html">Pcr system</a>
                         </li>
             </ul>
@@ -96,10 +97,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/pcrsystem.html"
+                    <a href="/hysteresis.html"
                        rel="bookmark"
-                       title="Permalink to PCR system">
-                        PCR system
+                       title="Permalink to Hysteresis">
+                        Hysteresis
                     </a>
                 </h1>
             </header>
@@ -109,7 +110,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-01-03T10:20:00+01:00"> sam. 03 janvier 2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-01-01T10:20:00+01:00"> ven. 01 janvier 2016</time>
     </span>
 
 
@@ -117,47 +118,80 @@
 <span class="label label-default">Tags</span>
 	<a href="/tag/bifurcation.html">bifurcation</a>
         /
-	<a href="/tag/modeling.html">modeling</a>
+	<a href="/tag/scipy.html">scipy</a>
         /
-	<a href="/tag/stability.html">stability</a>
+	<a href="/tag/python.html">python</a>
+        /
+	<a href="/tag/matplotlib.html">matplotlib</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <div class="section" id="graphical-model">
-<h2>Graphical model</h2>
-<div style="text-align:center"><div class="figure">
-<img alt="Graphical model" src="images/model.png" style="width: 65%;" />
-<p class="caption"><em>Graphical model</em></p>
-</div>
-</div><br/></div>
-<hr class="docutils" />
-<div class="section" id="differential-system">
-<h2>Differential system</h2>
-<p>The PCR system is given by the following system of ODE :</p>
+                <p>The following programm, written in <code class="code">
+python</code>
+, gives a numerical computation of hysteresis bifurcation in the dynamical system</p>
 <div class="math">
 \begin{equation*}
-\begin{cases}
-\dfrac{d r}{d t}=\gamma (t)q \left( 1-\dfrac{r}{r_m} \right) -  (B_1+B_2)r + F(r,c)rc+  G (r,p) rp + s_1 c + s_2 p \\
-\dfrac{d c}{d t} = B_1 r -  F (r,c) rc + C_1 p - s_1 c - C_2  c - \varphi (t) c \left( 1-b\right) + H(c,p)c p \\
-\dfrac{d p}{d t} = B_2 r - s_2 p - G (r,p)r p - C_1 p + C_2 c - H(c,p)cp \\
-\dfrac{d q}{d t} = -\gamma (t) q  \left( 1- \dfrac{r}{r_m} \right)  \\
-\dfrac{d b}{d t} = \varphi (t) c \left( 1- b \right)
-\end{cases}
+x' = \lambda + x - x^3
 \end{equation*}
 </div>
-<div class="panel panel-default">
-<div class="panel-heading">
-Theorem</div>
-<div class="panel-body">
-If <span class="math">\(C_1&gt;0\)</span>, the equilibrium point <span class="math">\((0,~0,~0,~0,~1)\)</span> is
-locally asymptotically semi-stable.</div>
+<p>with parameter <span class="math">\(\lambda\)</span> .</p>
+<div style="text-align:center"><div class="figure">
+<img alt="Hysteresis" src="images/hysteresis.png" style="width: 65%;" />
+<p class="caption"><em>Numerical computation of hysteresis</em></p>
 </div>
-</div>
-<hr class="docutils" />
-<div class="section" id="simulation">
-<h2>Simulation</h2>
-<p>You can make your <a class="reference external" href="http://mathsquare.alwaysdata.net/pcr/simulation.py">own simulation</a> of the model.</p>
-</div>
+</div><br/><div class="highlight"><pre><span class="c">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Numerical computation of the bifurcation in system</span>
+<span class="sd">x&#39; = lambda + x - x^3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c"># Scientific libraries</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span>
+
+<span class="c"># Step 1</span>
+
+<span class="n">lambda0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lambda0</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">f0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c"># Step 2</span>
+
+<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dl</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dl</span><span class="p">,</span> <span class="n">dx</span><span class="p">]</span>
+
+<span class="n">CI</span> <span class="o">=</span> <span class="p">[</span><span class="n">lambda0</span><span class="p">,</span> <span class="n">x0</span><span class="p">]</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">CI</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">CI</span><span class="p">,</span> <span class="o">-</span><span class="n">time</span><span class="p">)</span>
+
+<span class="n">l1</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">T</span>
+<span class="n">l2</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c"># Figure</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">r&quot;$\lambda$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">r&quot;$\bar{x}$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s">&#39;horizontal&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
