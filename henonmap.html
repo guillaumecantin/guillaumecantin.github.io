@@ -132,7 +132,7 @@ python</code>
 <div class="math">
 \begin{equation*}
 \begin{cases}
-x_{n+1} = a-x_n ^2 + byn \\
+x_{n+1} = a-x_n ^2 + by_n \\
 y_{n+1} = x_n
 \end{cases}
 \end{equation*}
@@ -146,8 +146,8 @@ y_{n+1} = x_n
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Bifurcation diagram for the Hénon map</span>
-<span class="sd">  x_n+1 = a-xn*xn+b*yn</span>
-<span class="sd">  y_n+1 = xn</span>
+<span class="sd">  x_{n+1} = a-xn*xn+b*yn</span>
+<span class="sd">  y_{n+1} = xn</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c"># Scientific libraries</span>
@@ -158,19 +158,18 @@ y_{n+1} = x_n
 <span class="n">EPS</span> <span class="o">=</span> <span class="mf">0.01</span>
 <span class="n">MAXP</span> <span class="o">=</span> <span class="mi">1000</span>
 
-<span class="n">AA</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">XX</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">YY</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">PP</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c"># Hénon map</span>
 
 <span class="n">b</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;diagram.dat&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">henon</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">xn</span><span class="o">*</span><span class="n">xn</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">yn</span><span class="p">,</span> <span class="n">xn</span><span class="p">]</span>
 
 <span class="c"># Compute bifurcations and write in a data file</span>
 
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;diagram.dat&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;Beginning computing&#39;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span><span class="mf">0.001</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">X0</span><span class="p">,</span> <span class="n">Y0</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
@@ -178,28 +177,20 @@ y_{n+1} = x_n
     <span class="n">find</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">a</span><span class="o">-</span><span class="n">xn</span><span class="o">*</span><span class="n">xn</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">yn</span><span class="p">,</span> <span class="n">xn</span>
-        <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+        <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">henon</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">MAXP</span> <span class="ow">and</span> <span class="n">find</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
         <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-        <span class="n">P</span><span class="o">=</span><span class="mi">1</span>
-        <span class="k">while</span> <span class="n">P</span> <span class="o">&lt;=</span> <span class="n">p</span><span class="p">:</span>
-            <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">a</span><span class="o">-</span><span class="n">xn</span><span class="o">*</span><span class="n">xn</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">yn</span><span class="p">,</span> <span class="n">xn</span>
-            <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">+</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">&lt;</span><span class="n">EPS</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="o">=</span> <span class="n">henon</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">&lt;</span><span class="n">EPS</span><span class="p">:</span>
             <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
             <span class="n">find</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="n">P</span> <span class="o">&lt;=</span> <span class="n">p</span><span class="p">:</span>
-                <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">a</span><span class="o">-</span><span class="n">xn</span><span class="o">*</span><span class="n">xn</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">yn</span><span class="p">,</span> <span class="n">xn</span>
-                <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
-                <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-                <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+                <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">a</span><span class="o">-</span><span class="n">xn</span><span class="o">*</span><span class="n">xn</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">yn</span><span class="p">,</span> <span class="n">xn</span>
+                <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">MAXP</span> <span class="ow">and</span> <span class="n">find</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">break</span>
+
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="c"># Open data file</span>
@@ -216,7 +207,7 @@ y_{n+1} = x_n
 <span class="c"># Figure</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
