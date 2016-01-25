@@ -164,9 +164,6 @@ y_{n+1} = b x_n
 <span class="n">Niter</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
 
-<span class="n">A</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
-
 <span class="c"># Compute bifurcation diagram</span>
 
 <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;diagram.dat&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
@@ -180,8 +177,6 @@ y_{n+1} = b x_n
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">henon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-        <span class="c">#A = A + [a]</span>
-        <span class="c">#X = X + [x]</span>
 
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
