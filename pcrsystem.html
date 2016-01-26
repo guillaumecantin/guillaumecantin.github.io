@@ -15,13 +15,13 @@
 
         <meta name="author" content="Guillaume Cantin" />
         <meta name="keywords" content="bifurcation,modeling,stability" />
-        <meta name="description" content="A mathematical model for human behaviors during catastrophic events." />
+        <meta name="description" content="A mathematical model for human behaviors during catastrophic events. You can make your own simulation." />
 
         <meta property="og:site_name" content="Dynamical Systems" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="PCR system"/>
         <meta property="og:url" content="/pcrsystem.html"/>
-        <meta property="og:description" content="A mathematical model for human behaviors during catastrophic events."/>
+        <meta property="og:description" content="A mathematical model for human behaviors during catastrophic events. You can make your own simulation."/>
         <meta property="article:published_time" content="2015-01-03" />
             <meta property="article:section" content="PCR system" />
             <meta property="article:tag" content="bifurcation" />
@@ -156,8 +156,22 @@ locally asymptotically semi-stable.</div>
 <hr class="docutils" />
 <div class="section" id="simulation">
 <h2>Simulation</h2>
-<p>You can make your <a class="reference external" href="http://mathsquare.alwaysdata.net/pcr/simulation.py">own simulation</a> of the model.</p>
-</div>
+<p>You can make your own simulation of the model : choose values of the parameters (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>).</p>
+<form action="http://mathsquare.alwaysdata.net/pcr/3d.py" method="post" class="form-inline">
+<span class="math">\(B_1 = \)</span><input type="text" name="B1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(B_2 = \)</span><input type="text" name="B2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/><br/>
+<span class="math">\(C_1 = \)</span><input type="text" name="C1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(C_2 = \)</span><input type="text" name="C2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/><br/>
+<span class="math">\(s_1 = \)</span><input type="text" name="s1" size="1" value=0 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(s_2 = \)</span><input type="text" name="s2" size="1" value=0 maxlength="4" class="form-control input-sm"/><br/><br/>
+<span class="math">\(\alpha_1 = \)</span><input type="text" name="alpha1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(\alpha_2 = \)</span><input type="text" name="alpha2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
+<span class="math">\(\delta_1 = \)</span><input type="text" name="delta1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(\delta_2 = \)</span><input type="text" name="delta2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
+<span class="math">\(\mu_1 = \)</span><input type="text" name="mu1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
+<span class="math">\(\mu_2 = \)</span><input type="text" name="mu2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
+<input type="submit" value="Simulation" class="btn btn-default btn-xs">
+</form></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
