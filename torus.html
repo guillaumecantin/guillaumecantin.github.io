@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>scipy - Dynamical Systems</title>
+    <title>Hamiltonian system - Dynamical Systems</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,16 +11,23 @@
 
     <link href="/images/favicon.ico" rel="icon">
 
+<link rel="canonical" href="/torus.html">
 
-    <meta name="author" content="Guillaume Cantin" />
-    <meta name="keywords" content="scipy" />
+        <meta name="author" content="Guillaume Cantin" />
+        <meta name="keywords" content="bifurcation,python,stability" />
+        <meta name="description" content="Visualize the solution of an hamiltonian system on a torus." />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Dynamical Systems" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Dynamical Systems"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="Dynamical Systems"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Hamiltonian system"/>
+        <meta property="og:url" content="/torus.html"/>
+        <meta property="og:description" content="Visualize the solution of an hamiltonian system on a torus."/>
+        <meta property="article:published_time" content="2016-01-25" />
+            <meta property="article:section" content="Bifurcations" />
+            <meta property="article:tag" content="bifurcation" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="stability" />
+            <meta property="article:author" content="Guillaume Cantin" />
 
 
     <!-- Bootstrap -->
@@ -51,7 +58,7 @@
                         <li >
                             <a href="/category/about.html">About</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/bifurcations.html">Bifurcations</a>
                         </li>
                         <li >
@@ -85,40 +92,136 @@
     <div class="row">
         <div class="col-sm-9">
 
-	
-            <article>
-                <h2><a href="/hysteresis.html">Hysteresis</a></h2>
-                <div class="summary"><p class="first last">A python programm for a numerical computation of hysteresis.</p>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/torus.html"
+                       rel="bookmark"
+                       title="Permalink to Hamiltonian system">
+                        Hamiltonian system
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-01-25T10:20:00+01:00"> lun. 25 janvier 2016</time>
+    </span>
 
-                    <a class="btn btn-default btn-xs" href="/hysteresis.html">more ...</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/bifurcation.html">bifurcation</a>
+        /
+	<a href="/tag/python.html">python</a>
+        /
+	<a href="/tag/stability.html">stability</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/lyapunov.html">Lyapunov exponents</a></h2>
-                <div class="summary"><p class="first last">A python programm to compute Lyapunov exponents for a continuous dynamical system.</p>
+                <p>Let us consider the hamiltonian of two harmonic oscillators:</p>
+<div class="math">
+\begin{equation*}
+H = \frac{1}{2} \big( p_1 ^2 + \omega_1 ^2 q_1 ^2 \big) +  \frac{1}{2} \big( p_2 ^2 + \omega_2 ^2 q_2 ^2 \big)
+\end{equation*}
+</div>
+<p>In action and angular variables, the hamiltonian reads:</p>
+<div class="math">
+\begin{equation*}
+\mathcal{H} = \omega_1 J_1 + \omega_2 J_2
+\end{equation*}
+</div>
+<p>The orbit lies on a torus <span class="math">\(T^2\)</span>. It is periodic if <span class="math">\(\frac{\omega_1}{\omega_2}\)</span> is rational, dense if not.</p>
+<p>You can visualize it : choose values of <span class="math">\(\omega_1\)</span> and <span class="math">\(\omega_2\)</span> (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(10\)</span>).</p>
+<form action="http://mathsquare.alwaysdata.net/pcr/torus.py" method="post" class="form-inline">
+<span class="math">\(\omega_1 = \)</span><input type="text" name="Omega1" size="2" value=5 maxlength="6" class="form-control input-sm"/><br/>
+<span class="math">\(\omega_2 = \)</span><input type="text" name="Omega2" size="2" value=1 maxlength="6" class="form-control input-sm"/><br/><br/>
+<input type="submit" value="Simulation" class="btn btn-default btn-xs">
+</form><hr class="docutils" />
+<div style="text-align:center"><div class="figure">
+<img alt="Periodic orbit" src="images/torus1.png" style="width: 65%;" />
+<p class="caption"><em>A periodic orbit</em></p>
+</div>
+</div><br/><hr class="docutils" />
+<div style="text-align:center"><div class="figure">
+<img alt="Dense orbit" src="images/torus2.png" style="width: 65%;" />
+<p class="caption"><em>A dense orbit</em></p>
+</div>
+</div><br/><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
 
-                    <a class="btn btn-default btn-xs" href="/lyapunov.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/poincare.html">Poincaré map</a></h2>
-                <div class="summary"><p class="first last">A python programm to compute a Poincaré map of the Hénon-Heiles model using the Hénon trick.</p>
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
 
-                    <a class="btn btn-default btn-xs" href="/poincare.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
 
-	<div style="text-align:center">
-		<div class="figure">
-		<img alt="Gallery" src="/images/gallery.gif" style="width: 42%;" />
-		<br/>
-		</div>
+	<!-- Beginning of comment system -->
+	<hr>
+	<div class="entry-content">
+	<h4>Comments</h4>
 	<br/>
-	</div>
+	<p>If you want to add a comment, just <a class="reference external" href="mailto:guillaumecantin@mail.com">send a email</a>.</p>
+	<!-- End of comment system -->
 
+	</div>
+        </article>
+    </section>
 
         </div>
 
