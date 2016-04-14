@@ -112,8 +112,12 @@
         <i class="fa fa-calendar"></i><time datetime="2015-01-03T10:20:00+01:00"> sam. 03 janvier 2015</time>
     </span>
 
+	<br/>
+        <span class="label label-default">Category</span>
+        <a href="/category/bifurcations.html">Bifurcations</a>
 
 
+<br/>
 <span class="label label-default">Tags</span>
 	<a href="/tag/bifurcation.html">bifurcation</a>
         /
@@ -121,6 +125,12 @@
         /
 	<a href="/tag/stability.html">stability</a>
     
+
+	<!-- Neighbors system -->
+	<br/>
+		<a href="/poincare.html"><span class="label label-default">Next</span></a>
+        	<a href="/poincare.html">Poincaré map</a>
+
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <div class="section" id="graphical-model">
@@ -133,7 +143,7 @@
 <hr class="docutils" />
 <div class="section" id="differential-system">
 <h2>Differential system</h2>
-<p>The PCR system is given by the following system of ODE :</p>
+<p>The PCR system [<cite><a href='#Alaoui' id='ref-Alaoui-1'>Verdière et al. (2014)</a></cite>] is given by the following system of ODE :</p>
 <div class="math">
 \begin{equation*}
 \begin{cases}
@@ -150,29 +160,37 @@
 Theorem</div>
 <div class="panel-body">
 If <span class="math">\(C_1&gt;0\)</span>, the equilibrium point <span class="math">\((0,~0,~0,~0,~1)\)</span> is
-locally asymptotically semi-stable.</div>
+locally stable.</div>
 </div>
 </div>
 <hr class="docutils" />
 <div class="section" id="simulation">
 <h2>Simulation</h2>
 <p>You can make your own simulation of the model : choose values of the parameters (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>).</p>
+<div class="row"><div class="col-lg-6"><div class="well">
 <form action="http://mathsquare.alwaysdata.net/pcr/3d.py" method="post" class="form-inline">
-<span class="math">\(B_1 = \)</span><input type="text" name="B1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(B_2 = \)</span><input type="text" name="B2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/><br/>
-<span class="math">\(C_1 = \)</span><input type="text" name="C1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(C_2 = \)</span><input type="text" name="C2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/><br/>
-<span class="math">\(s_1 = \)</span><input type="text" name="s1" size="1" value=0 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(s_2 = \)</span><input type="text" name="s2" size="1" value=0 maxlength="4" class="form-control input-sm"/><br/><br/>
-<span class="math">\(\alpha_1 = \)</span><input type="text" name="alpha1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(\alpha_2 = \)</span><input type="text" name="alpha2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
-<span class="math">\(\delta_1 = \)</span><input type="text" name="delta1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(\delta_2 = \)</span><input type="text" name="delta2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
-<span class="math">\(\mu_1 = \)</span><input type="text" name="mu1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>,
-<span class="math">\(\mu_2 = \)</span><input type="text" name="mu2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/><br/>
+<table class="table">
+<td>
+<span class="math">\(B_1 = \)</span><input type="text" name="B1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(C_1 = \)</span><input type="text" name="C1" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(s_1 = \)</span><input type="text" name="s1" size="1" value=0 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\alpha_1 = \)</span><input type="text" name="alpha1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\delta_1 = \)</span><input type="text" name="delta1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\mu_1 = \)</span><input type="text" name="mu1" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>
+</td>
+<td>
+<span class="math">\(B_2 = \)</span><input type="text" name="B2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(C_2 = \)</span><input type="text" name="C2" size="1" value=0.5 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(s_2 = \)</span><input type="text" name="s2" size="1" value=0 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\alpha_2 = \)</span><input type="text" name="alpha2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\delta_2 = \)</span><input type="text" name="delta2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/><br/>
+<span class="math">\(\mu_2 = \)</span><input type="text" name="mu2" size="1" value=0.1 maxlength="4" class="form-control input-sm"/>
+</td>
+</table>
 <input type="submit" value="Simulation" class="btn btn-default btn-xs">
-</form></div>
-<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+</form>
+</div></div></div></div>
+<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%&#64;#$&#64;#')) {
     var align = "center",
         indent = "0em",
         linebreak = "false";
@@ -186,7 +204,7 @@ locally asymptotically semi-stable.</div>
     var mathjaxscript = document.createElement('script');
     var location_protocol = (false) ? 'https' : document.location.protocol;
     if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%&#64;#$&#64;#';
     mathjaxscript.type = 'text/javascript';
     mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
@@ -228,10 +246,24 @@ locally asymptotically semi-stable.</div>
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
+</script><hr>
+<h2>Bibliography</h2>
+<p id='Alaoui'>N.&nbsp;Verdière, V.&nbsp;Lanza, R.&nbsp;Charrier, E.&nbsp;Dubos-Paillard, C.&nbsp;Ber­telle, and M.A. Aziz-Alaoui.
+Ma­the­ma­ti­cal mo­de­ling of hu­man be­ha­viors during catastrophic events.
+In <em>ICCSA 2014</em>, 67&ndash;74. University, Le Havre, 2014. <a class="cite-backref" href="#ref-Alaoui-1" title="Jump back to reference 1">↩</a></p>
+
             </div>
             <!-- /.entry-content -->
 
+	<!-- Neighbors system -->
+	<hr>
+	<div class="entry-content">
+	<p>
+		<a href="/poincare.html"><span class="label label-default">Next</span></a>
+        	<a href="/poincare.html">Poincaré map</a>
+	</p>
+	</div>
+	
 	<!-- Beginning of comment system -->
 	<hr>
 	<div class="entry-content">
