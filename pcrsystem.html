@@ -166,7 +166,8 @@ locally stable.</div>
 <hr class="docutils" />
 <div class="section" id="simulation">
 <h2>Simulation</h2>
-<p>You can make your own simulation of the model : choose values of the parameters (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>).</p>
+<div id="simulation"><p>You can make your own simulation of the model : choose values of the parameters (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>).</p>
+</div>
 <div class="row"><div class="col-lg-5"><div class="well well-sm">
 <form action="http://mathsquare.alwaysdata.net/pcr/3d.py" method="post" class="form-inline">
 <table class="table">
@@ -189,7 +190,7 @@ locally stable.</div>
 </table>
 <table class="table">
 <td align="right">
-<input type="submit" value="Simulation" class="btn btn-default btn-sm">
+<input type="submit" value="Simulation" class="btn btn-default btn-sm" onclick="myFunction()">
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
 </td>
 </table>
@@ -212,7 +213,15 @@ locally stable.</div>
 </div>
 </div>
 </form>
-</div></div></div></div>
+</div></div></div>
+<p class="text-info" id="demo"></p>
+
+<script>
+function myFunction() {
+  text = "Loading... Please wait...";
+  document.getElementById('demo').innerHTML = text;
+  }
+</script></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%&#64;#$&#64;#')) {
     var align = "center",
         indent = "0em",

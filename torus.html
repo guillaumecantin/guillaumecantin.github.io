@@ -149,14 +149,42 @@ H = \frac{1}{2} \big( p_1 ^2 + \omega_1 ^2 q_1 ^2 \big) +  \frac{1}{2} \big( p_2
 \end{equation*}
 </div>
 <p>The orbit lies on a torus <span class="math">\(T^2\)</span>. It is periodic if <span class="math">\(\frac{\omega_1}{\omega_2}\)</span> is rational, dense if not.</p>
-<p>You can visualize it : choose values of <span class="math">\(\omega_1\)</span> and <span class="math">\(\omega_2\)</span> (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(10\)</span>).</p>
+<div id="simulation"><p>You can visualize it : choose values of <span class="math">\(\omega_1\)</span> and <span class="math">\(\omega_2\)</span> (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(10\)</span>).</p>
+</div>
 <div class="row"><div class="col-lg-6"><div class="well">
 <form action="http://mathsquare.alwaysdata.net/pcr/torus.py" method="post" class="form-inline">
 <span class="math">\(\omega_1 = \)</span><input type="text" name="Omega1" size="2" value=5 maxlength="6" class="form-control input-sm"/><br/>
 <span class="math">\(\omega_2 = \)</span><input type="text" name="Omega2" size="2" value=1 maxlength="6" class="form-control input-sm"/><br/><br/>
-<input type="submit" value="Simulation" class="btn btn-default btn-xs">
+<input type="submit" value="Simulation" class="btn btn-default btn-sm" onclick="myFunction()">
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<h4 class="modal-title" id="myModalLabel">Simulation</h4>
+</div>
+<div class="modal-body">
+    To make your own simulation, you just have to enter decimal numbers for each parameter.
+    For instance, <span class="math">\(\omega_1 = 1.414\)</span>.<br/>
+    You can change the default values, and make many simulations.
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+</div>
+</div>
+</div>
+</div>
 </form>
-</div></div></div><hr class="docutils" />
+</div></div></div>
+<p class="text-info" id="demo"></p>
+
+<script>
+function myFunction() {
+  text = "Loading... Please wait...";
+  document.getElementById('demo').innerHTML = text;
+  }
+</script><hr class="docutils" />
 <div style="text-align:center"><div class="figure">
 <img alt="Periodic orbit" src="images/torus1.png" style="width: 65%;" />
 <p class="caption"><em>A periodic orbit</em></p>
