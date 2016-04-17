@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Van der Pol equation - Dynamical Systems</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/vanderpol.html">
+
+        <meta name="author" content="Guillaume Cantin" />
+        <meta name="keywords" content="bifurcation,python,stability" />
+        <meta name="description" content="Make your own simulation of the van der Pol equation." />
+
+        <meta property="og:site_name" content="Dynamical Systems" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Van der Pol equation"/>
+        <meta property="og:url" content="/vanderpol.html"/>
+        <meta property="og:description" content="Make your own simulation of the van der Pol equation."/>
+        <meta property="article:published_time" content="2016-04-04" />
+            <meta property="article:section" content="Bifurcations" />
+            <meta property="article:tag" content="bifurcation" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="stability" />
+            <meta property="article:author" content="Guillaume Cantin" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img src="/images/logo.png" width="30px"/> Dynamical Systems            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/about.html">About</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/bifurcations.html">Bifurcations</a>
+                        </li>
+                        <li >
+                            <a href="/category/networks.html">Networks</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<style>
+	#banner{
+	    background-image:url("/images/background.gif");
+	}
+</style>
+
+<div id="banner">
+	<div class="container">
+		<div class="copy">
+			<h1>Dynamical Systems</h1>
+				<p class="intro">Guillaume Cantin</p>
+		</div>
+	</div>
+</div><!-- End Banner -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/vanderpol.html"
+                       rel="bookmark"
+                       title="Permalink to Van der Pol equation">
+                        Van der Pol equation
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-04-04T10:20:00+02:00"> lun. 04 avril 2016</time>
+    </span>
+
+	<br/>
+        <span class="label label-default">Category</span>
+        <a href="/category/bifurcations.html">Bifurcations</a>
+
+
+<br/>
+<span class="label label-default">Tags</span>
+	<a href="/tag/bifurcation.html">bifurcation</a>
+        /
+	<a href="/tag/python.html">python</a>
+        /
+	<a href="/tag/stability.html">stability</a>
+    
+
+	<!-- Neighbors system -->
+	<br/>
+     		<a href="/graph.html"><span class="label label-default">Previous</span></a>
+        	<a href="/graph.html">Graphs</a>
+	<br/>
+		<a href="/poincareSphere.html"><span class="label label-default">Next</span></a>
+        	<a href="/poincareSphere.html">Poincaré sphere</a>
+
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Let us consider the van der Pol equation [<cite><a href='#Verhulst' id='ref-Verhulst-1'>Verhulst (1996)</a></cite>]:</p>
+<div class="math">
+\begin{equation*}
+\ddot{x} + x = \mu (1 - x^2) \dot{x} ,
+\end{equation*}
+</div>
+<p>formulated around 1920 by Balthasar van der Pol to
+describe oscillations in a triode-circuit. With <span class="math">\(x_1 = x\)</span> and <span class="math">\(x_2 = \dot{x}\)</span>, we obtain the following dynamical system, with parameter <span class="math">\(\mu\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\begin{cases}
+\dot{x}_1 = x_2 \\
+\dot{x}_2 = -x_1 + \mu (1-x_1 ^2)x_2
+\end{cases}.
+\end{equation*}
+</div>
+<div id="simulation"><p>You can visualize the solution passing through <span class="math">\((1,~0)\)</span> at <span class="math">\(t = 0\)</span>: choose a value of <span class="math">\(\mu\)</span> (decimal number between <span class="math">\(-1\)</span> and <span class="math">\(2\)</span>). For <span class="math">\(\mu &gt; 0\)</span>, the system has a stable limit cycle.</p>
+</div>
+<div class="row">
+<div class="col-lg-6">
+<div class="well">
+<form action="http://mathsquare.alwaysdata.net/pcr/vanderpol.py" method="post" class="form-inline">
+<span class="math">\(\mu = \)</span><input type="text" name="mu" size="2" value=0.5 maxlength="6" class="form-control input-sm"/><br/><br/>
+<input type="submit" value="Simulation" class="btn btn-default btn-sm" onclick="myFunction()">
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+      <div class="modal-body">
+      To make your own simulation, you just have to enter a decimal number for the parameter.
+      For instance, <span class="math">\(\mu = 0.01\)</span>.<br/>
+      You can change the default value, and make many simulations.
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+      </div>
+      </div>
+      </div>
+      </div>
+      </form>
+</div></div></div>
+<p class="text-info" id="demo"></p>
+
+<script>
+function myFunction() {
+  text = "Loading... Please wait...";
+  document.getElementById('demo').innerHTML = text;
+  }
+</script><hr class="docutils" />
+<div style="text-align:center"><div class="figure">
+<img alt="Van der Pol equation" src="images/vanderpol.png" style="width: 65%;" />
+<p class="caption"><em>The limit cycle in the van der Pol equation</em></p>
+</div>
+</div><br/><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%&#64;#$&#64;#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%&#64;#$&#64;#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script><hr>
+<h2>Bibliography</h2>
+<p id='Verhulst'>F.&nbsp;Verhulst.
+<em>Nonlinear differential equations and dynamical systems</em>.
+Springer Science &amp; Business Media, 1996. <a class="cite-backref" href="#ref-Verhulst-1" title="Jump back to reference 1">↩</a></p>
+
+            </div>
+            <!-- /.entry-content -->
+
+	<!-- Neighbors system -->
+	<hr>
+	<div class="entry-content">
+	<p>
+     		<a href="/graph.html"><span class="label label-default">Previous</span></a>
+        	<a href="/graph.html">Graphs</a>
+	</p>
+	<p>
+		<a href="/poincareSphere.html"><span class="label label-default">Next</span></a>
+        	<a href="/poincareSphere.html">Poincaré sphere</a>
+	</p>
+	</div>
+	
+	<!-- Beginning of comment system -->
+	<hr>
+	<div class="entry-content">
+	<h4>Comments</h4>
+	<br/>
+	<p>If you want to add a comment, just <a class="reference external" href="mailto:guillaumecantin@mail.com">send a email</a>.</p>
+	<!-- End of comment system -->
+
+	</div>
+        </article>
+    </section>
+
+        </div>
+
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://github.com/"><i class="fa fa-github-square fa-lg"></i>GitHub</a></li>
+                <li class="list-group-item"><a href="https://www.researchgate.net/"><i class="fa fa-researchgate-square fa-lg"></i>ResearchGate</a></li>
+                <li class="list-group-item"><a href="http://debian.org/"><i class="fa fa-debian-square fa-lg"></i>Debian</a></li>
+                <li class="list-group-item"><a href="http://www.gnu.org/"><i class="fa fa-gnu-square fa-lg"></i>GNU</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/bifurcation.html">
+                            bifurcation
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/chaos.html">
+                            chaos
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/graph.html">
+                            graph
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/henon.html">
+                            Hénon
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/lorenz.html">
+                            Lorenz
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/lyapunov.html">
+                            Lyapunov
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/matplotlib.html">
+                            matplotlib
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/modeling.html">
+                            modeling
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/networks.html">
+                            networks
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/poincare.html">
+                            Poincaré
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/scipy.html">
+                            scipy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/stability.html">
+                            stability
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/tikz.html">
+                            TikZ
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://matplotlib.org/" target="_blank">
+                Matplotlib
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.scipy.org/" target="_blank">
+                SciPy
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://owncloud.org/" target="_blank">
+                ownCloud
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://duckduckgo.com/" target="_blank">
+                DuckDuckGo
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://gnuplot.info/" target="_blank">
+                Gnuplot
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Guillaume Cantin
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/theme/js/bodypadding.js"></script>
+
+</body>
+</html>
