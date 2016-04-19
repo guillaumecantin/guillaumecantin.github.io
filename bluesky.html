@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Poincaré sphere - Dynamical Systems</title>
+    <title>Blue-sky bifurcation - Dynamical Systems</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,25 +11,23 @@
 
     <link href="/images/favicon.ico" rel="icon">
 
-<link rel="canonical" href="/poincareSphere.html">
+<link rel="canonical" href="/bluesky.html">
 
         <meta name="author" content="Guillaume Cantin" />
-        <meta name="keywords" content="Poincaré,bifurcation,stability,scipy,python,matplotlib" />
-        <meta name="description" content="A python program to compute a phase portrait on the Poincaré sphere." />
+        <meta name="keywords" content="bifurcation,python,stability,simulation" />
+        <meta name="description" content="Make your own simulation of the blue-sky bifurcation." />
 
         <meta property="og:site_name" content="Dynamical Systems" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Poincaré sphere"/>
-        <meta property="og:url" content="/poincareSphere.html"/>
-        <meta property="og:description" content="A python program to compute a phase portrait on the Poincaré sphere."/>
+        <meta property="og:title" content="Blue-sky bifurcation"/>
+        <meta property="og:url" content="/bluesky.html"/>
+        <meta property="og:description" content="Make your own simulation of the blue-sky bifurcation."/>
         <meta property="article:published_time" content="2016-04-04" />
             <meta property="article:section" content="Bifurcations" />
-            <meta property="article:tag" content="Poincaré" />
             <meta property="article:tag" content="bifurcation" />
-            <meta property="article:tag" content="stability" />
-            <meta property="article:tag" content="scipy" />
             <meta property="article:tag" content="python" />
-            <meta property="article:tag" content="matplotlib" />
+            <meta property="article:tag" content="stability" />
+            <meta property="article:tag" content="simulation" />
             <meta property="article:author" content="Guillaume Cantin" />
 
 
@@ -99,10 +97,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/poincareSphere.html"
+                    <a href="/bluesky.html"
                        rel="bookmark"
-                       title="Permalink to Poincaré sphere">
-                        Poincaré sphere
+                       title="Permalink to Blue-sky bifurcation">
+                        Blue-sky bifurcation
                     </a>
                 </h1>
             </header>
@@ -112,7 +110,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2016-04-04T10:20:00+02:00"> lun. 04 avril 2016</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-04-04T11:22:00+02:00"> lun. 04 avril 2016</time>
     </span>
 
 	<br/>
@@ -122,68 +120,86 @@
 
 <br/>
 <span class="label label-default">Tags</span>
-	<a href="/tag/poincare.html">Poincaré</a>
-        /
 	<a href="/tag/bifurcation.html">bifurcation</a>
-        /
-	<a href="/tag/stability.html">stability</a>
-        /
-	<a href="/tag/scipy.html">scipy</a>
         /
 	<a href="/tag/python.html">python</a>
         /
-	<a href="/tag/matplotlib.html">matplotlib</a>
+	<a href="/tag/stability.html">stability</a>
+        /
+	<a href="/tag/simulation.html">simulation</a>
     
 
 	<!-- Neighbors system -->
 	<br/>
-     		<a href="/graph.html"><span class="label label-default">Previous</span></a>
-        	<a href="/graph.html">Graphs</a>
-	<br/>
-		<a href="/vanderpol.html"><span class="label label-default">Next</span></a>
+     		<a href="/vanderpol.html"><span class="label label-default">Previous</span></a>
         	<a href="/vanderpol.html">Van der Pol equation</a>
 
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>The Poincaré sphere can be used to study the behavior at infinity of some dynamical systems [<cite><a href='#Perko' id='ref-Perko-1'>Perko (2001)</a></cite>].
-The projection equations defining the coordinates <span class="math">\((x,~y)\)</span> of a generic point of the plane, in terms of the coordinates <span class="math">\((X,~Y,~Z)\)</span>
-of a corresponding point on the sphere, read:</p>
+                <p>Let us consider the following dynamical system [<cite><a href='#kuznetsov2004elements' id='ref-kuznetsov2004elements-1'>Kuznetsov (2004)</a></cite>]:</p>
 <div class="math">
 \begin{equation*}
 \begin{cases}
-x = \dfrac{X}{Z}\\
-y = \dfrac{Y}{Z}
-\end{cases}.
-\end{equation*}
-</div>
-<p>The inverse transformation is given by:</p>
-<div class="math">
-\begin{equation*}
-\begin{cases}
-X = \dfrac{x}{1+x^2+y^2}\\
-Y = \dfrac{y}{1+x^2+y^2}\\
-Z = \dfrac{1}{1+x^2+y^2}
-\end{cases}.
-\end{equation*}
-</div>
-<p>The following figure shows a phase portrait on the Poincaré sphere of the system:</p>
-<div class="math">
-\begin{equation*}
-\begin{cases}
-\dot{x} = x \\
-\dot{y} = -y
+\dot{x}  = x \big( 2 + \mu - b(x^2+y^2) \big) + z^2 + y^2 + 2y \\
+\dot{y} = -z^3 - (y+1)(z^2+y^2+2y) - 4x + \mu y \\
+\dot{z} = z^2 (y+1) + x^2 - \varepsilon
 \end{cases},
 \end{equation*}
 </div>
-<p>exhibiting attractive nodes at infinity.</p>
-<div style="text-align:center"><div class="figure">
-<img alt="Poincaré sphere" src="images/poincare_sphere.png" style="width: 65%;" />
-<p class="caption"><em>A phase portrait on the Poincaré sphere</em></p>
+<p>due to Gavrilov and Shilnikov. For <span class="math">\(\varepsilon = 0.02\)</span> and <span class="math">\(b = 10\)</span>, the system exhibits a blue-sky bifurcation at <span class="math">\(\mu_0 \simeq 0.3\)</span>.</p>
+<div id="simulation"><p>You can visualize the orbit passing through <span class="math">\((-0.02,-0.35,0.17)\)</span> at <span class="math">\(t = 0\)</span>: choose a value of <span class="math">\(\mu\)</span> (decimal number between <span class="math">\(0.1\)</span> and <span class="math">\(0.5\)</span>). For <span class="math">\(\mu &gt; \mu_0\)</span>, the orbit is attracted to a stable limit cycle.</p>
 </div>
-</div><br/><div class="highlight"><pre><span class="c">#!/usr/bin/env python3</span>
+<div class="row">
+<div class="col-lg-6">
+<div class="well">
+<form action="http://mathsquare.alwaysdata.net/pcr/bluesky.py" method="post" class="form-inline">
+<span class="math">\(\mu = \)</span><input type="text" name="mu" size="2" value=0.4 maxlength="6" class="form-control input-sm"/><br/><br/>
+<input type="submit" value="Simulation" class="btn btn-default btn-sm" onclick="myFunction()">
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+      <div class="modal-body">
+      To make your own simulation, you just have to enter a decimal number for the parameter.
+      For instance, <span class="math">\(\mu = 0.21\)</span>.<br/>
+      You can change the default value, and make many simulations.
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+      </div>
+      </div>
+      </div>
+      </div>
+      </form>
+</div></div></div>
+<p class="text-info" id="demo"></p>
+
+<script>
+function myFunction() {
+  text = "Loading... Please wait...";
+  document.getElementById('demo').innerHTML = text;
+  }
+</script><hr class="docutils" />
+<div style="text-align:center"><div class="figure">
+<img alt="Blue-sky bifurcation (1)" src="images/bluesky.png" style="width: 65%;" />
+</div>
+<div class="figure">
+<img alt="Blue-sky bifurcation (2)" src="images/bluesky2.png" style="width: 65%;" />
+<p class="caption"><em>The blue-sky bifurcation</em></p>
+</div>
+</div><br/><hr class="docutils" />
+<p>Here is the <code class="code">
+python</code>
+ code to obtain the figures.</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python3</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">A program to visualize the orbits of a dynamical system on the Poincaré sphere</span>
+<span class="sd">Program to visualize the orbits of a dynamical system</span>
+<span class="sd">with a blue-sky bifurcation</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -207,24 +223,49 @@ Z = \dfrac{1}{1+x^2+y^2}
         <span class="bp">self</span><span class="o">.</span><span class="n">set_positions</span><span class="p">((</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]),(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ys</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
         <span class="n">FancyArrowPatch</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
 
-<span class="c"># Sphere</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">39</span><span class="p">)</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-<span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">u</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-
 <span class="c"># System</span>
-<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
-    <span class="sd">&quot;&quot;&quot; Hopf bifurcation</span>
-<span class="sd">    alpha = 1</span>
-<span class="sd">    dx = alpha*x - y - x*(x**2+y**2)</span>
-<span class="sd">    dy = x + alpha*y - y*(x**2+y**2)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">y</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">]</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.35</span> <span class="c"># from 0.1 to 0.5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">mu</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">eps</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">])</span>
+
+<span class="c"># Runge-Kutta method</span>
+<span class="k">def</span> <span class="nf">RK4</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span>
+    <span class="n">X2</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">p1</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+    <span class="n">X3</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">p2</span>
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+    <span class="n">tnew</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">h</span>
+    <span class="n">X4</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">p3</span>
+    <span class="n">p4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X4</span><span class="p">,</span> <span class="n">tnew</span><span class="p">)</span>
+    <span class="n">Xnew</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p3</span> <span class="o">+</span> <span class="n">p4</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span>
+    <span class="k">return</span> <span class="n">Xnew</span>
+
+<span class="c"># Numerical integration</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.35</span> <span class="p">,</span>  <span class="mf">0.17</span><span class="p">]</span>
+
+<span class="c"># With scipy.odeint</span>
+<span class="n">orbit</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c"># With RK4</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time</span><span class="p">:</span>
+    <span class="n">xnew</span> <span class="o">=</span> <span class="n">RK4</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">solution</span> <span class="o">+</span> <span class="p">[</span><span class="n">xnew</span><span class="p">]</span>
+    <span class="n">X0</span> <span class="o">=</span> <span class="n">xnew</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">T</span>
 
 <span class="c"># Figure</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
@@ -233,47 +274,17 @@ Z = \dfrac{1}{1+x^2+y^2}
 <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklines</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xgridlines</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklines</span><span class="p">(),</span><span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklines</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_zticklabels</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_zticklines</span><span class="p">(),</span><span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_zticklines</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_zticklabels</span><span class="p">([])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-
-<span class="c"># Numerical integration</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">IV</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
-      <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">],</span>
-      <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
-      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">],</span>
-      <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
-      <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
-      <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">]</span>
-      <span class="p">]</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">IV</span><span class="p">)):</span>
-    <span class="n">orbit</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">IV</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">time</span><span class="p">)</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">T</span>
-
-    <span class="c"># Projection on the Poincaré sphere</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">y</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot3D</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">Arrow3D</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="mi">500</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">502</span><span class="p">]],[</span><span class="n">Y</span><span class="p">[</span><span class="mi">500</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="mi">502</span><span class="p">]],[</span><span class="n">Z</span><span class="p">[</span><span class="mi">500</span><span class="p">],</span><span class="n">Z</span><span class="p">[</span><span class="mi">502</span><span class="p">]],</span> <span class="n">mutation_scale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;g&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">Arrow3D</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1200</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="mi">1202</span><span class="p">]],[</span><span class="n">b</span><span class="p">[</span><span class="mi">1200</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="mi">1202</span><span class="p">]],[</span><span class="n">c</span><span class="p">[</span><span class="mi">1200</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">1202</span><span class="p">]],</span> <span class="n">mutation_scale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%&#64;#$&#64;#')) {
@@ -334,9 +345,10 @@ Z = \dfrac{1}{1+x^2+y^2}
 }
 </script><hr>
 <h2>Bibliography</h2>
-<p id='Perko'>L.&nbsp;Perko.
-<em>Differential equations and dynamical systems</em>.
-Springer, New York, 3rd edition, 2001. <a class="cite-backref" href="#ref-Perko-1" title="Jump back to reference 1">↩</a></p>
+<p id='kuznetsov2004elements'>Y.&nbsp;Kuznetsov.
+<em>Elements of Applied Bifurcation Theory</em>.
+Applied Mathematical Sciences.
+Springer New York, 2004. <a class="cite-backref" href="#ref-kuznetsov2004elements-1" title="Jump back to reference 1">↩</a></p>
 
             </div>
             <!-- /.entry-content -->
@@ -345,11 +357,7 @@ Springer, New York, 3rd edition, 2001. <a class="cite-backref" href="#ref-Perko-
 	<hr>
 	<div class="entry-content">
 	<p>
-     		<a href="/graph.html"><span class="label label-default">Previous</span></a>
-        	<a href="/graph.html">Graphs</a>
-	</p>
-	<p>
-		<a href="/vanderpol.html"><span class="label label-default">Next</span></a>
+     		<a href="/vanderpol.html"><span class="label label-default">Previous</span></a>
         	<a href="/vanderpol.html">Van der Pol equation</a>
 	</p>
 	</div>
