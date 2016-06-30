@@ -12,7 +12,6 @@ class MyAdminSite(AdminSite):
 
 class FigureAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
-    #fields = ('author', 'title', 'summary', 'sourcecode', 'date', 'scanned_image')
     fieldsets = (
         ('Content', {
             'fields': ('author', 'title', 'summary', 'sourcecode', 'date', 'scanned_image'),
