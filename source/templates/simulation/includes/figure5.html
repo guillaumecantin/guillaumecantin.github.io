@@ -1,0 +1,42 @@
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Program to plot Rössler attractor</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># scientific libraries</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c1">#parameters</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.38</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.35</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">4.5</span>
+
+<span class="c1"># Rössler system</span>
+<span class="k">def</span> <span class="nf">rossler</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">X</span>    
+    <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="n">y</span> <span class="o">-</span> <span class="n">z</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">z</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]</span>
+
+<span class="c1"># numerical integration</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rossler</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s1">&#39;magenta&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>

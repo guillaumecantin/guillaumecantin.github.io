@@ -1,0 +1,104 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h3>FitzHugh-Nagumo model</h3>
+
+    <p>We consider a two identical cells network, symmetrically coupled with the
+    <a class="reference external" href="https://en.wikipedia.org/wiki/FitzHugh%E2%80%93Nagumo_model">FitzHugh-Nagumo model</a>.
+        <div class="math">
+            \begin{equation*}
+            \begin{cases}
+            \dot{v}_1 = v_1(a-v_1)(v_1-1)- w_1 -c v_2 \\
+            \dot{w}_1 = b v_1-\gamma w_1 \\
+            \dot{v}_2 = v_2(a-v_2)(v_2-1)- w_2 -c v_1 \\
+            \dot{w}_2 = b v_2-\gamma w_2
+            \end{cases}
+            \end{equation*}
+        </div>
+    An increase of the coupling parameter
+    <span class="math">\(c\)</span> lets a periodic regime appear
+    [<cite><a href='#golubitsky2006nonlinear' id='ref-golubitsky2006nonlinear-1'>Golubitsky and Stewart (2006)</a></cite>].
+    You can make your own simulation of the model: enter a decimal value between
+    <span class="math">\( 0 \)</span> and <span class="math">\( 1 \)</span>
+    for the parameter <span class="math">\( c \)</span>.
+    </p>
+    </div>
+
+    <hr/>
+
+    <div id="simulationzone">
+        <h3>Simulation</h3>
+    </div>
+
+    <div class="well"> <!-- Simulation zone -->
+    <form action="#simulationzone" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="form-group has-success">
+    <span class="math">\(c = \)</span><input type="text" name="c" size="2" value=0.3 maxlength="6" class="form-control"/>
+    <span class="text-success"><em>{{ result }}</em></span><br/><br/>
+    <input type="submit" value="Simulation" class="btn btn-success btn-sm">
+    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+    </div>
+
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+       <div class="modal-body">
+       To make your own simulation, you just have to enter a decimal number for the parameter.
+       For instance, <span class="math">\(c = 0.23\)</span>.
+       Then, click on <em>Simulation</em> button.<br/>
+       You can change the default value, and make many simulations.
+       </div>
+       <div class="modal-footer">
+       <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+       </div>
+       </div>
+       </div>
+       </div>
+
+    </form>
+
+    <p align="center"><em>FitzHugh-Nagumo model</em></p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/fhn1.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/fhn2.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    </div><!-- End simulation zone -->
+
+    <hr>
+
+    <h2>Bibliography</h2>
+    <p id='golubitsky2006nonlinear'>M.&nbsp;Golubitsky and I.&nbsp;Stewart.
+    Nonlinear dynamics of networks: the groupoid formalism.
+    <em>Bulletin of the American Mathematical Society</em>, 43(3):305–364, 2006.
+    <a class="cite-backref" href="#ref-golubitsky2006nonlinear-1" title="Jump back to reference 1">↩</a>
+    </p>
+
+    </article>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

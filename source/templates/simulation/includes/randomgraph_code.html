@@ -1,0 +1,42 @@
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3.5</span>
+
+
+<span class="c1"># Scientific libraries</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">density</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">random_geometric_graph</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">density</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+
+<span class="c1"># Figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">r&#39;$ n = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="o">+</span><span class="s1">r&#39; , \delta =&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">density</span><span class="p">)</span><span class="o">+</span><span class="s1">r&#39; $&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s1">&#39;Copyright - Guillaume Cantin - 2016&#39;</span><span class="p">,</span>
+    <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Path finding</span>
+<span class="k">if</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nx</span><span class="o">.</span><span class="n">has_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">liste</span> <span class="o">=</span> <span class="n">liste</span> <span class="o">+</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)]]</span>
+</pre></div>

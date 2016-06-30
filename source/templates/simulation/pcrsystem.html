@@ -1,0 +1,140 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h3>PCR system</h3>
+
+    <p>
+    The PCR system [<cite><a href='#Alaoui' id='ref-Alaoui-1'>Verdière et al. (2014)</a></cite>] is an attempt to model human behaviors
+    during catastrophic events. It is given by the following system of ODE.
+    <div class="math">
+        \begin{equation*}
+        \begin{cases}
+        \dfrac{d r}{d t}=\gamma (t) q \left( 1-\dfrac{r}{r_m} \right) -  (B_1+B_2)r + F(r,c)rc+  G (r,p) rp + s_1 c + s_2 p \\
+        \dfrac{d c}{d t} = B_1 r -  F (r,c) rc + C_1 p - s_1 c - C_2  c - \varphi (t) c \left( 1-b\right) + H(c,p)c p \\
+        \dfrac{d p}{d t} = B_2 r - s_2 p - G (r,p)r p - C_1 p + C_2 c - H(c,p)cp \\
+        \dfrac{d q}{d t} = -\gamma (t) q  \left( 1- \dfrac{r}{r_m} \right)  \\
+        \dfrac{d b}{d t} = \varphi (t) c \left( 1- b \right)
+        \end{cases}
+        \end{equation*}
+    </div>
+    </p>
+
+    <hr/>
+
+    <p align="center"><em>Graphical model for the PCR system</em></p>
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/model.png" width="85%" align="center"/>
+    </p>
+
+    <hr/>
+
+    <p align="center"><em>Functions <span class="math">\(\gamma \)</span> and <span class="math">\(\varphi \)</span></em></p>
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/phi-gamma.png" width="55%" align="center"/>
+    </p>
+
+    <hr/>
+
+    <p>
+    You can make your own simulation of the model: just enter decimal numbers for the parameters below.
+    </p>
+
+    </div>
+
+    <hr/>
+
+    <div id="simulationzone">
+        <h3>Simulation</h3>
+    </div>
+
+    <div class="well"> <!-- Simulation zone -->
+    <form action="#simulationzone" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="form-group has-success">
+    <table width="400">
+        <td align="right">
+            <span class="math">\(B_1 = \)</span><input type="text" name="B1" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(C_1 = \)</span><input type="text" name="C1" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(s_1 = \)</span><input type="text" name="s1" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\alpha_1 = \)</span><input type="text" name="alpha1" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\delta_1 = \)</span><input type="text" name="delta1" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\mu_1 = \)</span><input type="text" name="mu1" size="1" value=0.5 maxlength="4" class="form-control"/>
+        </td>
+        <td align="right">
+            <span class="math">\(B_2 = \)</span><input type="text" name="B2" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(C_2 = \)</span><input type="text" name="C2" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(s_2 = \)</span><input type="text" name="s2" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\alpha_2 = \)</span><input type="text" name="alpha2" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\delta_2 = \)</span><input type="text" name="delta2" size="1" value=0.5 maxlength="4" class="form-control"/><br/>
+            <span class="math">\(\mu_2 = \)</span><input type="text" name="mu2" size="1" value=0.5 maxlength="4" class="form-control"/>
+        </td>
+    </table>
+    <br/>
+    <table width="400">
+        <td align="right">
+            <span class="text-success"><em>{{ result }}</em></span><br/><br/>
+            <input type="submit" value="Simulation" class="btn btn-success btn-sm">
+            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Help</button><br/><br/>
+        </td>
+    </table>
+    </div>
+
+       <br/><br/>
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+       <div class="modal-body">
+       To make your own simulation, you just have to enter a decimal number between <span class="math">\( 0 \)</span> and <span class="math">\( 1 \)</span> for each parameter.
+       For instance, <span class="math">\( B_1 = 0.425\)</span>, <span class="math">\( B_2 = 0.414 \dots \)</span>
+       Then, click on <em>Simulation</em> button.<br/>
+       You can change the default values, and make many simulations.
+       </div>
+       <div class="modal-footer">
+       <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+       </div>
+       </div>
+       </div>
+       </div>
+
+    </form>
+
+    <p align="center"><em>Solution of the PCR system</em></p>
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/pcrsystem.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/pcrsystem3d.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    </div><!-- End simulation zone -->
+
+    <hr>
+    <h2>Bibliography</h2>
+    <p id='Alaoui'>N.&nbsp;Verdière, V.&nbsp;Lanza, R.&nbsp;Charrier, E.&nbsp;Dubos-Paillard, C.&nbsp;Bertelle, and M.A. Aziz-Alaoui.
+    Mathematical modeling of human behaviors during catastrophic events.
+    In <em>ICCSA 2014</em>, 67&ndash;74. University, Le Havre, 2014. <a class="cite-backref" href="#ref-Alaoui-1" title="Jump back to reference 1">↩</a>
+    </p>
+
+    </article>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

@@ -1,0 +1,132 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h3>PCR network: a tsunami in Nice</h3>
+
+    <p>
+    Here you can make a simulation of a PCR network.
+    Choose the coordinates for 4 panic nodes, 4 control nodes and enter a list of edges.
+    </p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/tsunami1.png?={{ mycache }}" width="75%" align="center"/>
+    </p>
+
+    </div>
+
+    <hr/>
+
+    <div id="simulationzone">
+        <h3>Simulation</h3>
+    </div>
+
+    <div class="well"> <!-- Simulation zone -->
+    <form action="#simulationzone" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="form-group has-success">
+
+    <h4>Panic nodes</h4>
+    Choose the coordinates of each panic node.<br/>
+    Node 1: <span class="math">\(x_1 = \)</span><input type="text" name="absX1" size="2" value=100 maxlength="6" class="form-control"/> <span class="math">\( y_1 = \)</span><input type="text" name="ordX1" size="2" value=100 maxlength="6" class="form-control"/><br/>
+    Node 2: <span class="math">\(x_2 = \)</span><input type="text" name="absX2" size="2" value=150 maxlength="6" class="form-control"/> <span class="math">\( y_2 = \)</span><input type="text" name="ordX2" size="2" value=200 maxlength="6" class="form-control"/><br/>
+    Node 3: <span class="math">\(x_3 = \)</span><input type="text" name="absX3" size="2" value=200 maxlength="6" class="form-control"/> <span class="math">\( y_3 = \)</span><input type="text" name="ordX3" size="2" value=300 maxlength="6" class="form-control"/><br/>
+    Node 4: <span class="math">\(x_4 = \)</span><input type="text" name="absX4" size="2" value=250 maxlength="6" class="form-control"/> <span class="math">\( y_4 = \)</span><input type="text" name="ordX4" size="2" value=350 maxlength="6" class="form-control"/><br/>
+
+    <h4>Control nodes</h4>
+    Choose the coordinates of each control node.<br/>
+    Node 5: <span class="math">\(x_5 = \)</span><input type="text" name="absX5" size="2" value=300 maxlength="6" class="form-control"/> <span class="math">\( y_5 = \)</span><input type="text" name="ordX5" size="2" value=100 maxlength="6" class="form-control"/><br/>
+    Node 6: <span class="math">\(x_6 = \)</span><input type="text" name="absX6" size="2" value=350 maxlength="6" class="form-control"/> <span class="math">\( y_6 = \)</span><input type="text" name="ordX6" size="2" value=200 maxlength="6" class="form-control"/><br/>
+    Node 7: <span class="math">\(x_7 = \)</span><input type="text" name="absX7" size="2" value=400 maxlength="6" class="form-control"/> <span class="math">\( y_7 = \)</span><input type="text" name="ordX7" size="2" value=300 maxlength="6" class="form-control"/><br/>
+    Node 8: <span class="math">\(x_8 = \)</span><input type="text" name="absX8" size="2" value=50  maxlength="6" class="form-control"/> <span class="math">\( y_8 = \)</span><input type="text" name="ordX8" size="2" value=350 maxlength="6" class="form-control"/><br/>
+
+    <h4>Edges</h4>
+    Choose a list of oriented edges.<br/>
+    List: <input type="text" name="edges" size="50" value="(1, 2), (2, 3), (5, 6)" maxlength="200" class="form-control"/><br/>
+
+    <br/>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Message</h3>
+        </div>
+        <div class="panel-body">
+        {{ result }}
+        </div>
+    </div>
+
+    <input type="submit" value="Simulation" class="btn btn-success btn-sm" onclick="myFunction()">
+    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+    </div>
+
+    <h4 class="text-info" id="demo"></h4>
+
+    <script>
+    function myFunction() {
+        text = "Computing and loading... Please wait...";
+        document.getElementById('demo').innerHTML = text;
+        }
+    </script>
+
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+       <div class="modal-body">
+       To make your own simulation of a tsunami in Nice, you must choose coordinates for each node.
+       The first coordinate must satisfy <span class="math">\(0 \leq x \leq 800 \)</span>.
+       The second coordinate must satisfy <span class="math">\(0 \leq y \leq 400 \)</span>.
+       Then you must enter a list of oriented edges. For instance, <span class="math">\( (3,~4) \)</span> corresponds to an edge
+       from node 3 towards node 4.
+       </div>
+       <div class="modal-footer">
+       <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+       </div>
+       </div>
+       </div>
+       </div>
+
+    </form>
+
+    {% if lenchoicenodes > 0 %}
+    <h4>Chosen nodes</h4>
+        {% for node in choicenodes %}
+        <h5 class="text-muted" id="demo">{{ node }}</h5>
+        {% endfor %}
+    <h4>Chosen edges</h4>
+    <h5 class="text-muted" id="demo">{{ choiceedges }}</h5>
+    {% endif %}
+
+    <p align="center"><em>Tsunami in Nice</em></p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/tsunami1.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/tsunami2.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    </div><!-- End simulation zone -->
+
+
+    </article>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

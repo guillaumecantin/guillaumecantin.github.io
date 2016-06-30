@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">
+            &copy; 2016 Guillaume Cantin
+            &middot; Powered by
+            <a class="reference external image-reference" href="https://www.djangoproject.com/" target="_blank">
+            <img alt="django" src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/django.jpeg" style="width: 6%" />
+            </a>
+         </div>
+         <div class="col-xs-2">
+            <p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p>
+         </div>
+      </div>
+   </div>
+</footer>
+
+<script src="{% static 'simulation/js/jquery.min.js' %}"></script>
+<script src="{% static 'simulation/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'simulation/js/respond.min.js' %}"></script>
+<script src="{% static 'simulation/js/bodypadding.js' %}"></script>
+
+</body>
+</html>

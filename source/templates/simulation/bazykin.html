@@ -1,0 +1,104 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h3>Bazykin's model</h3>
+
+    <p>
+    Let us consider the Bazykin's prey-predator model [<cite><a href='#bazykin1998nonlinear' id='ref-bazykin1998nonlinear-1'>Bazykin (1998)</a></cite>, <cite><a href='#kuznetsov2004elements' id='ref-kuznetsov2004elements-1'>Kuznetsov (2004)</a></cite>]:
+    <div class="math">
+        \begin{equation*}
+        \begin{cases}
+        \dot{x}_1 = x_1 - \dfrac{x_1 x_2}{1 + \alpha x_1} - \varepsilon x_1^2 \\
+        \dot{x}_2 = -\gamma x_2 + \dfrac{x_1 x_2}{1 + \alpha x_1} - \delta x_2^2
+        \end{cases},
+        \end{equation*}
+    </div>
+    with <span class="math">\(\gamma = 1\)</span> and <span class="math">\(\varepsilon = 0.1\)</span>.
+    You can visualize its phase portrait in the plane and on the Poincaré sphere: choose a value for <span class="math">\(\alpha\)</span> and <span class="math">\(\delta\)</span> (decimal numbers between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>).
+    </p>
+    </div>
+
+    <hr/>
+
+    <div id="simulationzone">
+        <h3>Simulation</h3>
+    </div>
+
+    <div class="well"> <!-- Simulation zone -->
+    <form action="#simulationzone" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="form-group has-success">
+    <span class="math">\( \alpha = \)</span><input type="text" name="alpha" size="2" value=0.5 maxlength="6" class="form-control"/><br/>
+    <span class="math">\( \delta = \)</span><input type="text" name="delta" size="2" value=0.5 maxlength="6" class="form-control"/>
+    <span class="text-success"><em>{{ result }}</em></span><br/><br/>
+    <input type="submit" value="Simulation" class="btn btn-success btn-sm">
+    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Help</button>
+    </div>
+
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+       <div class="modal-content">
+       <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">Simulation</h4>
+       </div>
+       <div class="modal-body">
+       To make your own simulation, you just have to enter decimal numbers between <span class="math">\( 0 \)</span>
+       and <span class="math">\( 1 \)</span> for each parameter.
+       For instance, <span class="math">\(\alpha = 0.08\)</span> and <span class="math">\(\delta = 0.43\)</span>.
+       Then, click on <em>Simulation</em> button.<br/>
+       You can change the default value, and make many simulations.
+       </div>
+       <div class="modal-footer">
+       <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+       </div>
+       </div>
+       </div>
+       </div>
+
+    </form>
+
+    <p align="center"><em>Phase portraits of the Bazykin's model</em></p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/bazykin1.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    <p align="center">
+    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/bazykin2.png?={{ mycache }}" width="95%" align="center"/>
+    </p>
+
+    </div><!-- End simulation zone -->
+
+    <hr>
+    <h2>Bibliography</h2>
+    <p id='bazykin1998nonlinear'>A.D.&nbsp;Bazykin.
+    <em>Nonlinear dynamics of interacting populations</em>.
+    World Scientific, 1998.
+    <a class="cite-backref" href="#ref-bazykin1998nonlinear-1" title="Jump back to reference 1">↩</a>
+    </p>
+    <p id='kuznetsov2004elements'>Y.&nbsp;Kuznetsov.
+    <em>Elements of Applied Bifurcation Theory</em>.
+    Applied Mathematical Sciences. Springer New York, 2004.
+    <a class="cite-backref" href="#ref-kuznetsov2004elements-1" title="Jump back to reference 1">↩</a>
+    </p>
+
+    </article>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}
