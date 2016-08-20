@@ -1,0 +1,127 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+<!-- Banner -->
+<style>
+	#banner{
+	    background-image:url("{% static 'simulation/images/background.gif' %}");
+	}
+</style>
+
+<div id="banner">
+	<div class="container">
+		<div class="copy">
+			<h1>Dynamical Systems</h1>
+				<p class="intro">Guillaume Cantin</p>
+		</div>
+	</div>
+</div><!-- End Banner -->
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-sm-9">
+
+            {% if texte != "" %}
+            <article>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ texte }}
+                </div>
+            </article>
+            {% endif %}
+
+    <h2><a href="http://guillaumecantin.pythonanywhere.com/animations/">Animations</a></h2>
+    <hr/>
+
+    {% for animation in animations_list %}
+        <table>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 20px;">
+                    <a href="http://guillaumecantin.pythonanywhere.com/animation/{{ animation.id }}">
+                    <img src="http://guillaumecantin.pythonanywhere.com/media/{{ animation.scanned_screen }}" width="140px"/></img>
+                    </a>
+                </td>
+                <td><h4><a href="http://guillaumecantin.pythonanywhere.com/animation/{{ animation.id }}">{{ animation.title }}</a></h4>
+                    Author: {{ animation.author }}<br/>
+                    Date: {{ animation.date }}<br/>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ animation.id }}">more ...</a>
+                </td>
+            </tr>
+        </table>
+
+    <hr/>
+    {% endfor %}
+
+    <h2><a href="http://guillaumecantin.pythonanywhere.com/figures/">Figures</a></h2>
+    <hr/>
+
+    {% for figure in figures_list %}
+        <table>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 20px;">
+                    <a href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">
+                    <img src="http://guillaumecantin.pythonanywhere.com/media/{{ figure.scanned_image }}" width="140px"/></img>
+                    </a>
+                </td>
+                <td><h4><a href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">{{ figure.title }}</a></h4>
+                    Author: {{ figure.author }}<br/>
+                    Date: {{ figure.date }}<br/>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">more ...</a>
+                </td>
+            </tr>
+        </table>
+
+    <hr/>
+    {% endfor %}
+
+    <h2><a href="http://guillaumecantin.pythonanywhere.com/simulations/">Simulations</a></h2>
+    <hr/>
+
+            {% for href, title, summary in simulations_list %}
+            <table>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 20px;">
+                    <a href="http://guillaumecantin.pythonanywhere.com/{{ href }}">
+                    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/{{ href }}screen.png" width="140px"/></img>
+                    </a>
+                </td>
+                <td><h4><a href="http://guillaumecantin.pythonanywhere.com/{{ href }}">{{ title }}</a></h4>
+                <div class="summary"><p class="first last">{{ summary }}</p>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/{{ href }}">more ...</a>
+                </div>
+                </td>
+            </tr>
+            </table>
+
+            <!--
+            <article>
+                <h4><a href="http://guillaumecantin.pythonanywhere.com/{{ href }}">{{ title }}</a></h4>
+                <div class="summary"><p class="first last">{{ summary }}</p>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/{{ href }}">more ...</a>
+                </div>
+            </article>-->
+
+            <hr/>
+            {% endfor %}
+
+
+                <div class="entry-content">
+                <h4>Contact</h4>
+                If you want to contact me, just
+                <a class="reference internal" href="mailto:guillaumecantin&#64;mail.com">send an email</a>.
+                </div>
+
+            <hr/>
+
+
+            {% include "simulation/includes/gallery.html" %}
+
+
+    </div>
+
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

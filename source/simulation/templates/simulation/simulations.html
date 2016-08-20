@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-sm-9">
+
+    <h2>Simulations</h2>
+    <hr/>
+
+            {% for href, title, summary in simulations_list %}
+            <table>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 20px;">
+                    <a href="http://guillaumecantin.pythonanywhere.com/{{ href }}">
+                    <img src="http://guillaumecantin.pythonanywhere.com/static/simulation/images/{{ href }}screen.png" width="140px"/></img>
+                    </a>
+                </td>
+                <td><h4><a href="http://guillaumecantin.pythonanywhere.com/{{ href }}">{{ title }}</a></h4>
+                <div class="summary"><p class="first last">{{ summary }}</p>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/{{ href }}">more ...</a>
+                </div>
+                </td>
+            </tr>
+            </table>
+
+            <hr/>
+            {% endfor %}
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

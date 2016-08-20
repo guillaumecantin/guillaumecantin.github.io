@@ -1,0 +1,42 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-sm-9">
+
+    <h3>Figures</h3>
+    <hr/>
+
+    <!--<div class="highlight">
+        <pre style='color: gray; background:#f6f8ff;'>f(x) = \sqrt{\frac{1}{\sqrt{2}}+\sqrt{x^2+1}}<br/>convert -i %img animation.gif</pre>
+    </div>-->
+
+    {% for figure in figures_list %}
+        <table>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 20px;">
+                    <a href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">
+                    <img src="http://guillaumecantin.pythonanywhere.com/media/{{ figure.scanned_image }}" width="140px"/></img>
+                    </a>
+                </td>
+                <td><h4><a href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">{{ figure.title }}</a></h4>
+                    Author: {{ figure.author }}<br/>
+                    Date: {{ figure.date }}<br/>
+                    <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/figure/{{ figure.id }}">more ...</a>
+                </td>
+            </tr>
+        </table>
+
+    <hr/>
+    {% endfor %}
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

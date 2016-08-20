@@ -1,0 +1,70 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h3>About</h3>
+
+    <p>
+        This website is about <em>dynamical systems</em>. Its main goal is to share <code>python</code> programs for numerical simulations and creating
+        figures, and to propose an interface for simulating dynamical systems.
+    </p>
+    <p>
+        It is powered by
+            <a class="reference external image-reference" href="https://www.djangoproject.com/" target="_blank">
+            Django</a>,
+        and hosted at
+             <a class="reference external image-reference" href="https://www.pythonanywhere.com/" target="_blank">
+            PythonAnywhere</a>.
+    </p>
+
+    <hr/>
+
+    <h4>Contact</h4>
+
+    <p>
+    I am a mathematics teacher in Le Havre, Normandy, France.
+    If you want to contact me, just <a class="reference internal" href="mailto:guillaumecantin&#64;mail.com">send an email</a>.
+    </p>
+
+    <hr/>
+
+    <h4>Source code</h4>
+
+    <p>
+    The source code of this website is placed under the terms of the
+    <a class="reference external image-reference" href="https://opensource.org/licenses/GPL-3.0" target="_blank">GNU General Public License</a>,
+    and is available on
+    <a class="reference external image-reference" href="https://github.com/guillaumecantin/guillaumecantin.github.io" target="_blank">GitHub</a>.
+    </p>
+
+    </div>
+    </article>
+
+    <hr/>
+
+    <div style="text-align:center">
+        <br/><br/><br/><br/><br/>
+        <span style="padding: 10px;"><a class="reference external image-reference" href="https://www.python.org/" target="_blank" data-toggle="tooltip" data-placement="left" title="Python"><img alt="Python" src={% static 'simulation/images/python.jpeg' %} style="height: 70px;" /></a></span>
+        <span style="padding: 10px;"><a class="reference external image-reference" href="https://www.djangoproject.com/" target="_blank" data-toggle="tooltip" data-placement="left" title="Django"><img alt="django" src={% static 'simulation/images/dj.png' %} style="height: 70px;" /></a></span>
+        <span style="padding: 10px;"><a class="reference external image-reference" href="https://www.mathjax.org/" target="_blank" data-toggle="tooltip" data-placement="left" title="MathJax"><img alt="MathJax" src={% static 'simulation/images/mathjax.svg' %} style="height: 70px;" /></a></span>
+        <span style="padding: 10px;"><a class="reference external image-reference" href="http://www.scipy.org/" target="_blank" data-toggle="tooltip" data-placement="left" title="Scipy"><img alt="Scipy" src={% static 'simulation/images/scipy.png' %} style="height: 70px;" /></a></span>
+        <span style="padding: 10px;"><a class="reference external image-reference" href="http://matplotlib.org/" target="_blank" data-toggle="tooltip" data-placement="left" title="Matplotlib"><img alt="Matplotlib" src={% static 'simulation/images/matplotlib.png' %} style="height: 70px;" /></a></span>
+        <br/><br/><br/><br/><br/>
+    </div>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

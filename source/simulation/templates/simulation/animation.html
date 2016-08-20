@@ -1,0 +1,88 @@
+{% load staticfiles %}
+{% include "simulation/includes/banner.html" %}
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-9">
+
+
+    <article>
+    <div class="entry-content">
+
+    <h2>{{ animation.title }}</h2>
+
+    <hr/>
+    <p>Author: {{ animation.author }}</p>
+    <p>Date: {{ animation.date }}</p>
+
+    {% if rank == 0 %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ next.id }}">Next</a> {{ next.title }}
+    </p>
+    {% elif rank == last %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ previous.id }}">Previous</a> {{ previous.title }}
+    </p>
+    {% else %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ previous.id }}">Previous</a> {{ previous.title }}
+    </p>
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ next.id }}">Next</a> {{ next.title }}
+    </p>
+    {% endif %}
+
+    <hr/>
+
+        <p>
+            {{ animation.summary | safe }}
+        </p>
+    <hr/>
+
+    <br/>
+    <div align="center">
+        <em class="text-muted">{{ animation.title }}</em><br/><br/>
+        <img src="http://guillaumecantin.pythonanywhere.com/media/{{ animation.scanned_animation }}" />
+    </div>
+    <br/><br/>
+
+    <hr/>
+
+    <h3>Source code</h3>
+        <p>
+            {% include codeurl %}
+        </p>
+
+    </div>
+
+    <hr/>
+
+    {% if rank == 0 %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ next.id }}">Next</a> {{ next.title }}
+    </p>
+    {% elif rank == last %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ previous.id }}">Previous</a> {{ previous.title }}
+    </p>
+    {% else %}
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ previous.id }}">Previous</a> {{ previous.title }}
+    </p>
+    <p>
+        <a class="btn btn-success btn-xs" href="http://guillaumecantin.pythonanywhere.com/animation/{{ next.id }}">Next</a> {{ next.title }}
+    </p>
+    {% endif %}
+
+
+    </article>
+
+    </div>
+    <br/>
+    {% include "simulation/includes/side.html" %}
+
+    </div>
+</div> <!-- class="container" -->
+
+{% include "simulation/includes/footer.html" %}

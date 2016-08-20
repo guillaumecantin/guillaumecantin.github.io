@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dynamical Systems</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="{% static 'simulation/images/favicon.ico' %}" rel="icon">
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+        <meta name="author" content="Guillaume Cantin" />
+
+        <meta property="og:site_name" content="Dynamical Systems" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Dynamical Systems"/>
+        <meta property="og:description" content="Dynamical Systems"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'simulation/css/bootstrap.sandstone.min.css' %}" type="text/css"/>
+    <link href="{% static 'simulation/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'simulation/css/friendly.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'simulation/css/style.css' %}" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://guillaumecantin.pythonanywhere.com/" class="navbar-brand">
+        <img src="{% static 'simulation/images/logo.png' %}" width="30px"/> Dynamical Systems </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://guillaumecantin.pythonanywhere.com/">Home</a>
+                        </li>
+                        <li>
+                            <a href="http://guillaumecantin.pythonanywhere.com/about/">About</a>
+                        </li>
+                        {% for name, category in articles %}
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ name }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for href, title, summary in category %}
+                            <li><a href="http://guillaumecantin.pythonanywhere.com/{{ href }}/">{{ title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        </li>
+                        {% endfor %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://guillaumecantin.pythonanywhere.com/myadmin/">ADMIN</a></li>
+                {% if islogged == 0 %}
+                <li><a href="http://guillaumecantin.pythonanywhere.com/login/">LOG IN</a></li>
+                {% else %}
+                <li><a href="http://guillaumecantin.pythonanywhere.com/logout/">LOG OUT</a></li>
+                {% endif %}
+              <!--<li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>-->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
